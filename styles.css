@@ -275,7 +275,7 @@ body {
 
 .dark {
     --paper: #17272e;
-    --ink: #2dc728;
+    --ink: #24343a;
     --navy: #c9e1db;
     --blue: #8bd0d0;
     --line: #3b5359;
@@ -296,7 +296,7 @@ body {
 }
 
 .dark .error code {
-    background: #553b37
+    background: #c76aa3
 }
 
 .dark .toc a:hover,
