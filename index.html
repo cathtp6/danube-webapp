@@ -12,25 +12,54 @@
 <body>
   <header class="topbar">
     <button id="menuButton" class="icon-button" aria-label="開啟目錄" aria-controls="sidePanel" aria-expanded="false">☰</button>
-    <a class="brand" href="#top">Danube Grand Journey</a>
+    <a class="brand" href="#top">DANUBE GRAND JOURNEY 2026</a>
     <div class="top-actions">
       <button id="themeButton" class="icon-button" aria-label="切換深色模式">◐</button>
       <button id="installButton" class="install-button" hidden>安裝 App</button>
     </div>
   </header>
+
   <div id="backdrop" class="backdrop" hidden></div>
-  <aside id="sidePanel" class="side-panel" aria-label="頁面目錄">
-    <div class="panel-heading"><span>Journey Map</span><button id="closeButton" class="icon-button" aria-label="關閉目錄">×</button></div>
-    <nav id="toc" class="toc"><p class="muted">正在載入目錄…</p></nav>
+  <aside id="sidePanel" class="side-panel" aria-label="旅程選單">
+    <div class="panel-heading">
+      <span>旅程選單</span>
+      <button id="closeButton" class="icon-button" aria-label="關閉選單">×</button>
+    </div>
+
+    <nav class="toc" aria-label="主要旅程章節">
+      <div class="menu-group-title">Journey Sections</div>
+      <a href="#overview">Overview</a>
+      <a href="#before">Before Cruise</a>
+      <a href="#cruise">Cruises</a>
+      <a href="#ship">Ship</a>
+      <a href="#after">After Cruises</a>
+
+      <div class="menu-group-title">Jump to date</div>
+      <a class="level-3" href="#d14">14 Sep</a>
+      <a class="level-3" href="#d15">15 Sep</a>
+      <a class="level-3" href="#d16">16 Sep</a>
+      <a class="level-3" href="#d17">17 Sep · Day 1</a>
+      <a class="level-3" href="#d18">18 Sep · Day 2</a>
+      <a class="level-3" href="#d19">19 Sep · Day 3</a>
+      <a class="level-3" href="#d20">20 Sep · Day 4</a>
+      <a class="level-3" href="#d21">21 Sep · Day 5</a>
+      <a class="level-3" href="#d22">22 Sep · Day 6</a>
+      <a class="level-3" href="#d23">23 Sep · Day 7</a>
+      <a class="level-3" href="#d24">24 Sep · Day 8</a>
+      <a class="level-3" href="#d25">25 Sep</a>
+      <a class="level-3" href="#d26">26 Sep</a>
+    </nav>
   </aside>
+
   <main id="top" class="page-shell">
     <div id="status" class="status">正在載入旅程內容…</div>
     <article id="content" class="content" aria-live="polite"></article>
     <div id="error" class="error" hidden>
       <h1>內容尚未載入</h1>
-      <p>請確認原始檔案名稱為 <code>danube_grand_journey.html</code>，並與本頁放在同一個 GitHub Pages 資料夾。</p>
+      <p>請確認 <code>danube_grand_journey.html</code> 與本頁位於同一個 GitHub Pages 資料夾。</p>
     </div>
   </main>
+
   <button id="toTop" class="to-top" aria-label="回到頂部" hidden>↑</button>
   <script src="app.js" defer></script>
 </body>
