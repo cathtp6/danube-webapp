@@ -1,0 +1,14 @@
+{
+  "name": "Danube Grand Journey",
+  "short_name": "Danube Journey",
+  "description": "中歐多瑙河旅程電子旅誌",
+  "lang": "zh-Hant",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#173b4d",
+  "background_color": "#fbfaf7",
+  "icons": []
+}

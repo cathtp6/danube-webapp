@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Danube Grand Journey · Professional Itinerary</title>
+    <style>
+        :root {
+            --ink: #17191d;
+            --paper: #fbf8f1;
+            --gold: #b28a4a;
+            --wine: #4d2028;
+            --line: #d8c9ae;
+            --muted: #6c665d
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.75
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: #17191df5;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 4vw;
+            box-shadow: 0 3px 16px #0003
+        }
+
+        .brand {
+            letter-spacing: .13em;
+            font-size: .7rem;
+            color: #e6c98d;
+            white-space: nowrap
+        }
+
+        .nav {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+            flex-wrap: wrap
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: .78rem
+        }
+
+        .jump {
+            background: #252832;
+            color: #fff;
+            border: 1px solid var(--gold);
+            border-radius: 4px;
+            padding: 6px 8px;
+            font: inherit;
+            font-size: .78rem
+        }
+
+        .lang button {
+            border: 1px solid #d9bd7c;
+            background: transparent;
+            color: #f7e5b7;
+            border-radius: 99px;
+            padding: 5px 10px;
+            cursor: pointer
+        }
+
+        .lang button.active {
+            background: #d9bd7c;
+            color: #17191d
+        }
+
+        .hero {
+            min-height: 70vh;
+            display: grid;
+            place-items: end;
+            padding: 8vw 7vw 7vw;
+            color: #fff;
+            background: linear-gradient(90deg, #14161add, #14161a40), url('images/hero-danube.jpg') center/cover fixed
+        }
+
+        .hero-inner {
+            max-width: 900px
+        }
+
+        .kicker {
+            text-transform: uppercase;
+            letter-spacing: .3em;
+            color: #ecd18c;
+            font-size: .76rem
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: .92;
+            margin: 18px 0
+        }
+
+        .hero p {
+            font-size: 1.12rem;
+            max-width: 730px
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: auto;
+            padding: 52px 22px
+        }
+
+        .section {
+            scroll-margin-top: 78px;
+            margin-bottom: 68px
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            gap: 20px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 25px
+        }
+
+        .section-head h2 {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1;
+            margin: 0 0 14px;
+            color: var(--wine)
+        }
+
+        .section-head span {
+            color: var(--gold);
+            font-size: .8rem;
+            letter-spacing: .18em;
+            margin-bottom: 17px
+        }
+
+        .lead {
+            font-size: 1.18rem;
+            max-width: 900px
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-block: 1px solid var(--line);
+            margin: 25px 0
+        }
+
+        .fact {
+            padding: 18px;
+            border-right: 1px solid var(--line)
+        }
+
+        .fact:last-child {
+            border: 0
+        }
+
+        .fact b {
+            display: block;
+            color: var(--gold);
+            font-size: 1.25rem
+        }
+
+        .daylist {
+            display: grid;
+            gap: 16px
+        }
+
+        .daycard {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 25px;
+            box-shadow: 0 12px 30px #4d202811
+        }
+
+        .day-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px
+        }
+
+        .daycard h3 {
+            color: var(--wine);
+            margin: 8px 0;
+            font-size: 1.5rem
+        }
+
+        .date {
+            color: var(--gold);
+            font-weight: bold;
+            letter-spacing: .06em
+        }
+
+        .pill {
+            display: inline-block;
+            background: #f4ead7;
+            border: 1px solid #e0cfb0;
+            color: #755627;
+            border-radius: 999px;
+            padding: 3px 9px;
+            font-size: .76rem
+        }
+
+        .schedule {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: 14px 0;
+            margin: 16px 0
+        }
+
+        .time-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 16px;
+            padding: 5px 0
+        }
+
+        .time {
+            color: var(--wine);
+            font-weight: bold
+        }
+
+        .attraction {
+            margin-top: 22px;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
+            display: grid;
+            grid-template-columns: 235px 1fr;
+            gap: 22px;
+            align-items: start
+        }
+
+        .attraction img {
+            display: block;
+            width: 235px;
+            height: 170px;
+            object-fit: cover;
+            border: 1px solid var(--line)
+        }
+
+        .place {
+            font-size: 1.25rem;
+            color: var(--wine);
+            font-weight: bold
+        }
+
+        .place small {
+            display: block;
+            color: var(--gold);
+            font-size: .9rem;
+            font-weight: normal
+        }
+
+        .wide-img {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 22px 0;
+            border: 1px solid var(--line)
+        }
+
+        .map {
+            color: var(--wine);
+            border-bottom: 1px solid var(--gold);
+            text-decoration: none;
+            font-size: .9rem
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--line);
+            padding: 24px;
+            box-shadow: 0 12px 30px #4d202811
+        }
+
+        .ship-table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .ship-table th,
+        .ship-table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .ship-table th {
+            width: 35%;
+            color: var(--wine)
+        }
+
+        .small {
+            color: var(--muted);
+            font-size: .91rem
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        footer {
+            background: var(--ink);
+            color: #eee;
+            text-align: center;
+            padding: 35px 7vw
+        }
+
+        @media(max-width:850px) {
+            .topbar {
+                align-items: flex-start;
+                flex-wrap: wrap
+            }
+
+            .nav {
+                order: 3;
+                width: 100%
+            }
+
+            .day-top,
+            .attraction,
+            .time-row {
+                grid-template-columns: 1fr
+            }
+
+            .attraction img {
+                width: 100%;
+                height: 210px
+            }
+
+            .facts {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .fact:nth-child(2) {
+                border-right: 0
+            }
+
+            .hero {
+                background-attachment: scroll
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">DANUBE GRAND JOURNEY · 2026</div>
+        <nav class="nav"><a href="#overview"><span data-zh>旅程總覽</span><span class="hidden" data-en>Overview</span></a><a
+                href="#before"><span data-zh>河輪前</span><span class="hidden" data-en>Before Cruise</span></a><a
+                href="#cruise"><span data-zh>河輪行程</span><span class="hidden" data-en>Cruise</span></a><a
+                href="#ship"><span data-zh>船舶資訊</span><span class="hidden" data-en>Ship</span></a><a href="#after"><span
+                    data-zh>河輪後</span><span class="hidden" data-en>After Cruise</span></a></nav><select class="jump">
+            <option value="">快速跳至日期 · Jump to date</option>
+            <option value="d14">9/14 星期一</option>
+            <option value="d15">9/15 星期二</option>
+            <option value="d16">9/16 星期三</option>
+            <option value="d17">9/17 Day 1</option>
+            <option value="d18">9/18 Day 2</option>
+            <option value="d19">9/19 Day 3</option>
+            <option value="d20">9/20 Day 4</option>
+            <option value="d21">9/21 Day 5</option>
+            <option value="d22">9/22 Day 6</option>
+            <option value="d23">9/23 Day 7</option>
+            <option value="d24">9/24 Day 8</option>
+            <option value="d25">9/25 星期五</option>
+            <option value="d26">9/26 星期六</option>
+        </select>
+        <div class="lang"><button class="active" data-set="zh">中文</button><button data-set="en">English</button></div>
+    </header>
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="kicker">14–26 September 2026 · Taiwan to Germany · Danube River Cruise</div>
+            <h1 data-zh>多瑙河<br>全程旅誌</h1>
+            <h1 class="hidden" data-en>THE GRAND<br>DANUBE JOURNEY</h1>
+            <p data-zh>一份以專業旅遊手冊方式編排的完整行程，從台灣出發，穿越巴伐利亞山區，搭乘 MS Gentleman 探索多瑙河，最後由慕尼黑返台。</p>
+            <p class="hidden" data-en>A professional travel itinerary from Taiwan through Bavaria, aboard MS Gentleman
+                on the Danube, and home from Munich.</p>
+        </div>
+    </section>
+    <main class="wrap">
+        <section id="overview" class="section">
+            <div class="section-head">
+                <h2 data-zh>旅程總覽</h2>
+                <h2 class="hidden" data-en>Journey Overview</h2><span>00</span>
+            </div>
+            <p class="lead" data-zh>旅程從台灣出發，經阿布達比轉機抵達慕尼黑，先深入探索德國南部的阿爾卑斯山區，再於帕紹登上 MS Gentleman，沿著多瑙河穿越德國、奧地利、斯洛伐克與匈牙利。旅途中將造訪宏偉修道院、帝國宮殿、河岸城市、葡萄園與中世紀小鎮，最後返回慕尼黑，在慕尼黑啤酒節與城市採購後返台。
+
+這趟旅程不只是一次河輪旅行，而是一場從山巒到河流、從城堡到皇宮、從歷史文化到巴伐利亞生活風情的完整中歐體驗。</p>
+            <p class="lead hidden" data-en>This is more than a river cruise. It is a complete Central European journey combining long-haul flights, the Bavarian Alps, an eight-day Danube cruise, historic imperial cities, UNESCO-listed landscapes and the vibrant atmosphere of Munich’s Oktoberfest.</p>
+            <div class="facts">
+                <div class="fact"><b>14 Sep</b><span data-zh>台灣出發</span><span class="hidden" data-en>Depart
+                        Taiwan</span></div>
+                <div class="fact"><b>17–24 Sep</b><span data-zh>河輪 Day 1–8</span><span class="hidden" data-en>Cruise
+                        Days 1–8</span></div>
+                <div class="fact"><b>25 Sep</b><span data-zh>返程航班</span><span class="hidden" data-en>Return
+                        flights</span></div>
+                <div class="fact"><b>26 Sep</b><span data-zh>抵達台北</span><span class="hidden" data-en>Arrive
+                        Taipei</span></div>
+            </div><img class="wide-img" src="images/cruise-map.jpg" alt="河輪路線小地圖 Danube cruise route map">
+        </section>
+        <section id="before" class="section">
+            <div class="section-head">
+                <h2 data-zh>河輪前 · 巴伐利亞序曲</h2>
+                <h2 class="hidden" data-en>Before the Cruise · Bavarian Prelude</h2><span>PRELUDE</span>
+            </div>
+            <div class="daylist">
+                <article id="d14" class="daycard">
+                    <div class="date">2026年9月14日｜星期一 · Monday</div>
+                    <h3>台灣出發 · Departure from Taiwan</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">19:25</div>
+                            <div>EY899 · TPE → AUH <span data-zh>從台北飛往阿布達比</span><span class="hidden" data-en>Depart
+                                    Taipei for Abu Dhabi</span></div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>住宿</div>
+                            <div class="time hidden" data-en>Accommodation</div>
+                            <div data-zh>機上過夜</div>
+                            <div class="hidden" data-en>Overnight on board</div>
+                        </div>
+                    </div>
+                </article>
+                <article id="d15" class="daycard">
+                    <div class="date">2026年9月15日｜星期二 · Tuesday</div>
+                    <h3>阿布達比 → 慕尼黑 → 新天鵝堡 → 加米施-帕滕基興</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">00:15</div>
+                            <div data-zh>抵達阿布達比。</div>
+                            <div class="hidden" data-en>Arrive in Abu Dhabi.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">02:35</div>
+                            <div>EY125 · AUH → MUC <span data-zh>轉機前往慕尼黑。</span><span class="hidden" data-en>Connect to
+                                    Munich.</span></div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">06:55</div>
+                            <div data-zh>抵達慕尼黑。</div>
+                            <div class="hidden" data-en>Arrive in Munich.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">9:00 - 12:00</div>
+                            <div data-zh>抵達妍蓉家，稍作休息</div>
+                            <div class="hidden" data-en>Small break and lunch at home.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">14:30 - 18:00</div>
+                            <div data-zh>參觀新天鵝堡。16:05:城堡語音導覽</div>
+                            <div class="hidden" data-en>Visit Neuschwanstein Castle. 16:05: Audio tour at the castle.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">18:00</div>
+                            <div data-zh>前往加米施-帕滕基興</div>
+                            <div class="hidden" data-en>Head to Garmisch-Partenkirchen for stay today</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>住宿</div>
+                            <div class="time hidden" data-en>Accommodation</div>
+                            <div><a class="map" href="https://maps.app.goo.gl/Qipc7BFbf7fnvpMUA"
+                                    target="_blank">加米施-帕滕基興住宿 · Hotel Blaue Gams</a></div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/neuschwanstein.jpg" alt="新天鵝堡 Neuschwanstein Castle">
+                        <div>
+                            <div class="place">新天鵝堡 <small>Neuschwanstein Castle</small></div>
+                            <p data-zh>
+                                新天鵝堡由路德維希二世下令興建，坐落於阿爾卑斯山麓高地，以白色外牆、尖塔、森林與山谷景觀聞名。它把中世紀城堡想像與十九世紀浪漫主義融合成童話般的建築；語音導覽可幫助了解建造背景、房間功能，以及國王對歌劇、傳說與理想王國的想像。
+                            </p>
+                            <p class="hidden" data-en>Commissioned by Ludwig II above the Alpine foothills,
+                                Neuschwanstein is known for white walls, towers, forests and valley views. It combines
+                                medieval castle imagery with nineteenth-century Romanticism; the audio guide explains
+                                its construction, rooms and the king’s fascination with opera, legends and an idealised
+                                kingdom.</p>
+                        </div>
+                    </div>
+                    <div class="attraction">
+                        <div class="place">加米施-帕滕基興 <small>Garmisch-Partenkirchen</small></div>
+                        <div>
+                            <p data-zh>德國南部著名的阿爾卑斯山度假區，由 Garmisch 與 Partenkirchen
+                                兩個歷史聚落組成。這裡以山景、傳統木屋、戶外運動與巴伐利亞文化聞名，也是通往德國最高峰楚格峰的重要門戶。城鎮適合作為山區活動前後的住宿、休息與補給基地。</p>
+                            <p class="hidden" data-en>A renowned Alpine resort formed from the historic settlements of
+                                Garmisch and Partenkirchen. Known for mountain scenery, traditional houses, outdoor
+                                sports and Bavarian culture, it is an important gateway to Zugspitze and an excellent
+                                base for accommodation, rest and supplies.</p>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/zugspitze.jpg" alt="楚格峰 Zugspitze">
+                        <div>
+                            <div class="place">楚格峰 <small>Zugspitze</small></div>
+                            <p data-zh>楚格峰海拔 2,962
+                                公尺，是德國最高峰，位於阿爾卑斯山脈。是否登頂需視時間、天候、纜車運行、交通與票券狀況決定；即使不登頂，從加米施-帕滕基興與艾布胡一帶也能欣賞壯闊高山景觀。</p>
+                            <p class="hidden" data-en>At 2,962 metres, Zugspitze is Germany’s highest mountain in the
+                                Alps. A summit visit depends on time, weather, cable-car operations, transport and
+                                tickets; even without reaching the top, the views from Garmisch-Partenkirchen and Eibsee
+                                are spectacular.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d16" class="daycard">
+                    <div class="date">2026年9月16日｜星期三 · Wednesday</div>
+                    <h3>加米施-帕滕基興山區探索</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time" data-zh>白天／下午</div>
+                            <div class="time hidden" data-en>Daytime/Afternoon</div>
+                            <div data-zh>纜車、爬山、艾布胡 與 帕特納赫峽谷；。</div>
+                            <div class="hidden" data-en>Cable car, hiking, Eibsee and Partnach Gorge.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>傍晚</div>
+                            <div class="time hidden" data-en>Evening</div>
+                            <div data-zh>移動至第二天住宿。</div>
+                            <div class="hidden" data-en>move to the second accommodation in the evening.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>住宿</div>
+                            <div class="time hidden" data-en>Accommodation</div>
+                            <div><a class="map" href="https://maps.app.goo.gl/ZLNv3oejE3Hy9gW88" target="_blank">第二天住宿 · Wurznwirt Schneizlreuth</a></div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/eibsee.jpg" alt="艾布胡 Eibsee">
+                        <div>
+                            <div class="place">艾布胡 <small>Eibsee</small></div>
+                            <p data-zh>
+                                艾布胡位於楚格峰山腳，以清澈的藍綠色湖水、森林岸線與湖中小島著稱。湖水會隨天氣與光線呈現不同色彩，晴天時能映照阿爾卑斯山壁；湖畔步道適合散步與攝影，也可依時間安排遊湖或與纜車行程搭配。
+                            </p>
+                            <p class="hidden" data-en>Eibsee lies at the foot of Zugspitze and is known for turquoise
+                                water, forested shores and small islands. Its colours change with weather and light, and
+                                on clear days the Alps reflect across the lake. Lakeside paths are ideal for walking and
+                                photography, with boating or a cable-car visit possible depending on time.</p>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/partnachklamm.jpg" alt="Partnachklamm 峽谷 Partnach Gorge">
+                        <div>
+                            <div class="place">帕特納赫峽谷 <small>Partnach Gorge</small></div>
+                            <p data-zh>帕特納赫峽谷是由帕特納河切割而成的狹長峽谷，岩壁高聳，瀑布與溪流穿行其中。步道沿著岩壁、橋道與隧道延伸，水氣、回聲與光影使短程健行具有戲劇性；建議穿著防滑鞋並預留安全行走時間。</p>
+                            <p class="hidden" data-en>Partnach Gorge is a narrow ravine carved by the Partnach River,
+                                with towering cliffs, waterfalls and rushing water. Paths run beside rock walls, bridges
+                                and tunnels, creating a dramatic short hike of spray, echoes and changing light. Wear
+                                grippy footwear and allow comfortable walking time.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="cruise" class="section">
+            <div class="section-head">
+                <h2 data-zh>河輪每日行程</h2>
+                <h2 class="hidden" data-en>Daily Cruise Journal</h2><span>DAY 1–8</span>
+            </div>
+            <div class="daylist">
+                <article id="d17" class="daycard">
+                    <div class="date">9月17日｜星期四 · Thursday · DAY 1</div>
+                    <h3>帕紹 Passau</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time" data-zh>時間允許下</div>
+                            <div class="time hidden" data-en>If time allows</div>
+                            <div data-zh>可前往贝希特斯加登鹽礦。導覽時間 9:00 - 10:30</div>
+                            <div class="hidden" data-en>Optional visit to Salt Mine Berchtesgaden for Tour at 9:00 - 10:30.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">11:00</div>
+                            <div data-zh>開車前往帕紹搭船。</div>
+                            <div class="hidden" data-en>Drive to Passau for embarkation.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">15:00</div>
+                            <div data-zh>登船、入住與熟悉船上設施。</div>
+                            <div class="hidden" data-en>Embark, settle into the cabin and familiarise yourself with the
+                                ship.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">18:30</div>
+                            <div data-zh>通過施洛格恩河灣，開始航行。</div>
+                            <div class="hidden" data-en>Pass through the Schlögener Schlinge and begin sailing.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>陸地時間</div>
+                            <div class="time hidden" data-en>Time ashore</div>
+                            <div data-zh>登船後至 18:30 前；實際可用時間取決於抵達帕紹與登船安排。</div>
+                            <div class="hidden" data-en>From arrival and embarkation until 18:30; the exact time
+                                available depends on the drive and boarding schedule.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>航行中／船上過夜。</div>
+                            <div class="hidden" data-en>Sailing / overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/salt-mine-berchtesgaden.jpg"
+                            alt="贝希特斯加登鹽礦 Salt Mine Berchtesgaden">
+                        <div>
+                            <div class="place">贝希特斯加登鹽礦 <small>Salt Mine Berchtesgaden</small></div>
+                            <p data-zh><strong>時間允許下可前往。</strong>
+                                這座位於巴伐利亞阿爾卑斯山區的歷史地下鹽礦，透過礦坑通道、礦工歷史、地下設施與鹽業文化，介紹當地長久的採鹽傳統。因 Day 1
+                                還需前往帕紹搭船，實際是否前往必須視交通、開放時間與登船安排決定。</p>
+                            <p class="hidden" data-en><strong>Visit if time allows.</strong> This historic underground
+                                salt mine in the Bavarian Alps presents local mining traditions through underground
+                                passages, mining history, installations and salt culture. Because Day 1 also requires
+                                the drive to Passau and embarkation, the visit depends on traffic, opening times and
+                                boarding arrangements.</p>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/passau.jpg" alt="帕紹 Passau">
+                        <div>
+                            <div class="place">帕紹 <small>Passau</small></div>
+                            <p data-zh>
+                                帕紹因多瑙河、因河與伊爾茲河三河匯流而被稱為「三河城」。老城坐落於狹長半島，巴洛克建築、河岸步道與聖斯德望主教座堂共同構成城市風貌；這裡也是本次河輪的登船與下船起點。</p>
+                            <p class="hidden" data-en>Passau is known as the “City of Three Rivers,” where the Danube,
+                                Inn and Ilz meet. Its old town occupies a narrow peninsula framed by Baroque buildings,
+                                riverside walks and St. Stephen’s Cathedral. It is the embarkation and disembarkation
+                                point for this cruise.</p>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/schlogener-schlinge.jpg" alt="施洛格恩河灣 Schlögener Schlinge">
+                        <div>
+                            <div class="place">施洛格恩河灣 <small>Schlögener Schlinge</small></div>
+                            <p data-zh>多瑙河最具代表性的大彎道之一，河流在森林與山丘之間形成近乎迴轉的壯觀曲線。從船上觀看時，河道、坡地與晚間光線會隨航行角度變化。</p>
+                            <p class="hidden" data-en>One of the Danube’s most recognisable bends, forming a dramatic
+                                near-loop between wooded hills. From the ship, river, slopes and evening light change
+                                with the sailing angle.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d18" class="daycard">
+                    <div class="date">9月18日｜星期五 · Friday · DAY 2</div>
+                    <h3>梅爾克 Melk → 維也納 Vienna</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">10:30</div>
+                            <div data-zh>抵達梅爾克，約3小時岸上參觀。</div>
+                            <div class="hidden" data-en>Arrive in Melk and begin the shore visit aroung 3 hours.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">13:30</div>
+                            <div data-zh>開航穿越瓦豪河谷。</div>
+                            <div class="hidden" data-en>Depart and sail through the Wachau Valley.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">20:30</div>
+                            <div data-zh>抵達維也納 Nussdorf。</div>
+                            <div class="hidden" data-en>Arrive at Vienna Nussdorf.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>陸地時間/觀光城市</div>
+                            <div class="time hidden" data-en>Time ashore / Destination city</div>
+                            <div data-zh>梅爾克約 3 小時；晚上維也納</div>
+                            <div class="hidden" data-en> Melk  3 hours； Evening:Vienna</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>維也納 Nussdorf 靠岸，船上過夜。</div>
+                            <div class="hidden" data-en>Alongside at Vienna Nussdorf; overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/melk-abbey.jpg" alt="梅爾克修道院 Melk Abbey">
+                        <div>
+                            <div class="place">梅爾克修道院 <small>Stift Melk / Melk Abbey</small></div>
+                            <p data-zh>梅爾克修道院正式名稱為「Abtei Melk」，是一座於 1089 年創立的本篤會修道院，修士在此已延續近千年的傳統。現今修道院約有 22
+                                位修士，並持續依照本篤會規則生活與工作。訪客可參觀修道院圖書館、修道院教堂、修道院公園與介紹修道院歷史的博物館；今日所見的華麗巴洛克建築主要建於 1702 至 1746
+                                年。內部參觀票價為每人 16 歐元，不含導覽。</p>
+                            <p class="hidden" data-en>Officially the Abbey of Melk, this Benedictine abbey was founded
+                                in 1089, and monks have continued their tradition here for almost 1,000 years. Today the
+                                community includes around 22 monks who live and work according to the Rule of Saint
+                                Benedict. Visitors can explore the library, abbey church, park and historical museum;
+                                the magnificent Baroque complex was built mainly between 1702 and 1746. Interior visit:
+                                €16 per person without a guide.</p>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/wachau-valley.jpg" alt="瓦豪河谷 Wachau Valley">
+                        <div>
+                            <div class="place">瓦豪河谷 <small>Wachau Valley</small></div>
+                            <p data-zh>瓦豪河谷是下奧地利多瑙河沿岸、梅爾克與克雷姆斯之間約 33 公里的景觀區。這裡以梯田葡萄園、中世紀城堡、修道院、巴洛克建築、河岸小鎮與杏果文化聞名，並於 2000
+                                年列入 UNESCO 世界遺產。從船上航行時，可以看到葡萄園沿山坡層層排列，梅爾克、杜恩斯泰因與克雷姆斯等城鎮則將自然、農業與歷史建築連成一體。</p>
+                            <p class="hidden" data-en>The Wachau Valley is a stunning approximately 33-kilometre stretch
+                                of the Danube in Lower Austria between Melk and Krems. It is known for terraced
+                                vineyards, medieval castles, abbeys, Baroque architecture, riverside towns and apricot
+                                culture, and became a UNESCO World Heritage Site in 2000. From the ship, vineyards climb
+                                the hillsides while Melk, Dürnstein and Krems connect nature, agriculture and historic
+                                architecture.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d19" class="daycard">
+                    <div class="date">9月19日｜星期六 · Saturday · DAY 3</div>
+                    <h3>維也納 Vienna</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">白天</div>
+                            <div class="time hidden" data-en>Morning</div>
+                            <div data-zh>維也納市區觀光，實際活動依岸上安排。</div>
+                            <div class="hidden" data-en>Vienna sightseeing; exact activities follow the shore programme.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">17:30</div>
+                            <div data-zh>離開 Nussdorf，前往匈牙利。</div>
+                            <div class="hidden" data-en>Leave Nussdorf for Hungary.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>陸地時間</div>
+                            <div class="time hidden" data-en>Time ashore</div>
+                            <div data-zh>約 21 小時，包含前一晚抵達後至今日 17:30。</div>
+                            <div class="hidden" data-en>Approximately 21 hours, including the period from the previous
+                                evening’s arrival until 17:30.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>離開維也納後航行中／船上過夜。</div>
+                            <div class="hidden" data-en>Sailing after leaving Vienna; overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/hofburg.jpg" alt="霍夫堡皇宮 Hofburg Palace">
+                        <div>
+                            <div class="place">霍夫堡皇宮 <small>Hofburg Palace</small></div>
+                            <p data-zh>霍夫堡皇宮訴說哈布斯堡王朝的歷史，曾是帝國長期的政治與生活中心。今日可參觀多座重要博物館，其中皇室珍寶館收藏帝冠、皇室器物與象徵王權的珍貴物件；Sisi
+                                博物館則透過茜茜皇后的個人故事、服飾與生活細節，讓訪客看到皇室光環下較為私密的一面。宮殿群位於維也納市中心，適合與老城街區一併探索。</p>
+                            <p class="hidden" data-en>The Hofburg tells the story of the Habsburgs and once served as
+                                the empire’s political and residential centre. Today it includes major museums: the
+                                Treasury displays imperial crowns and regalia, while the Sisi Museum explores the
+                                empress through her personal story, clothing and daily life. Located in central Vienna,
+                                it pairs naturally with the old town.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d20" class="daycard">
+                    <div class="date">9月20日｜星期日 · Sunday · DAY 4</div>
+                    <h3>布達佩斯 Budapest</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">10:00</div>
+                            <div data-zh>抵達布達佩斯，開始岸上觀光；離岸時間待船上公告。</div>
+                            <div class="hidden" data-en>Arrive in Budapest and begin sightseeing ashore; departure time to be announced onboard.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>陸地時間</div>
+                            <div class="time hidden" data-en>Time ashore</div>
+                            <div data-zh>至少自 10:00 起；完整時長取決於船上公告的離岸時間。</div>
+                            <div class="hidden" data-en>From at least 10:00; the total duration depends on the departure
+                                time announced onboard.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>布達佩斯靠岸過夜，船上住宿。</div>
+                            <div class="hidden" data-en>Alongside in Budapest; overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/budapest-parliament.jpg"
+                            alt="匈牙利國會大廈 Hungarian Parliament Building">
+                        <div>
+                            <div class="place">匈牙利國會大廈 <small>Hungarian Parliament Building</small></div>
+                            <p data-zh>布達佩斯國會大廈，匈牙利語為 Országház，建於 1885 至 1904 年，是匈牙利國會所在地。新哥德式建築最初為匈牙利王國的國會而建，設計受到倫敦英國國會大廈的影響。建築沿多瑙河展開，長 268 公尺、寬 123 公尺、高 96
+                                公尺，是匈牙利最高大的建築之一。白天可欣賞尖塔、立面與細部裝飾，夜間從河岸或船上觀看燈光倒映尤其經典。</p>
+                            <p class="hidden" data-en>The Budapest Parliament Building, Országház in Hungarian, was
+                                built from 1885 to 1904 and is the seat of the Hungarian Parliament. Originally designed
+                                for the parliament of the Kingdom of Hungary, its Neo-Gothic architecture was influenced
+                                by London’s Palace of Westminster. The building stretches 268 m along the Danube, is 123
+                                m wide and 96 m high. Its illuminated façade is especially memorable at night from the
+                                river.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d21" class="daycard">
+                    <div class="date">9月21日｜星期一 · Monday · DAY 5</div>
+                    <h3>布達佩斯 → 埃斯泰爾戈姆 · Budapest → Esztergom</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">12:00</div>
+                            <div data-zh>離開布達佩斯。</div>
+                            <div class="hidden" data-en>Depart Budapest.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">17:30–19:30</div>
+                            <div data-zh>抵達埃斯泰爾戈姆並安排約 2 小時陸地觀光。</div>
+                            <div class="hidden" data-en>Arrive in Esztergom and enjoy approximately 2 hours ashore.
+                            </div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">19:30</div>
+                            <div data-zh>離開埃斯泰爾戈姆。</div>
+                            <div class="hidden" data-en>Depart Esztergom.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>航行中／船上過夜。</div>
+                            <div class="hidden" data-en>Sailing / overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/esztergom-basilica.jpg" alt="埃斯泰爾戈姆大教堂 Esztergom Basilica">
+                        <div>
+                            <div class="place">埃斯泰爾戈姆大教堂 <small>St. Adalbert Cathedral / Esztergom Basilica</small>
+                            </div>
+                            <p data-zh>聖母升天暨聖艾德伯特主教座堂，也稱埃斯泰爾戈姆大教堂，是羅馬天主教埃斯泰爾戈姆—布達佩斯總教區的主教座堂，建於 1001 至 1010
+                                年。它是匈牙利最大的教堂，也是世界上最大規模的教堂之一。巨大的圓頂、高聳立面與山坡上的位置，使它在多瑙河沿岸具有強烈的地標性。</p>
+                            <p class="hidden" data-en>The Cathedral Basilica of the Assumption of the Blessed Virgin
+                                Mary and St. Adalbert, also called Esztergom Basilica, is the cathedral of the Roman
+                                Catholic Archdiocese of Esztergom–Budapest. Built from 1001 to 1010, it is Hungary’s
+                                largest church and one of the largest in the world. Its huge dome, monumental façade and
+                                hillside position make it a powerful landmark above the Danube.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d22" class="daycard">
+                    <div class="date">9月22日｜星期二 · Tuesday · DAY 6</div>
+                    <h3>布拉提斯拉瓦 Bratislava</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">08:00</div>
+                            <div data-zh>抵達布拉提斯拉瓦。</div>
+                            <div class="hidden" data-en>Arrive in Bratislava.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">08:00–16:00</div>
+                            <div data-zh>陸地時間：共約 8 小時，適合安排老城步行觀光。</div>
+                            <div class="hidden" data-en>Time ashore: approximately 8 hours, suitable for walking through
+                                the old town.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">16:00</div>
+                            <div data-zh>離開布拉提斯拉瓦。</div>
+                            <div class="hidden" data-en>Depart Bratislava.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>航行中／船上過夜。</div>
+                            <div class="hidden" data-en>Sailing / overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/bratislava-old-town.jpg"
+                            alt="布拉提斯拉瓦老城 Bratislava Old Town">
+                        <div>
+                            <div class="place">布拉提斯拉瓦老城 <small>Bratislava Old Town</small></div>
+                            <p data-zh>
+                                老城適合步行探索，街道兩側可見歷史建築、廣場、咖啡館、教堂與小型博物館。城市規模相對緊湊，能在有限靠岸時間內感受斯洛伐克首都與中歐多國歷史交會的痕跡；從老城向河岸延伸，也能欣賞多瑙河與現代城市景觀。
+                            </p>
+                            <p class="hidden" data-en>Bratislava Old Town is best explored on foot, with historic
+                                buildings, squares, cafés, churches and small museums. Its compact scale makes it well
+                                suited to limited shore time and reveals the capital’s Central European and
+                                multinational history; walking towards the river adds Danube and modern-city views.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d23" class="daycard">
+                    <div class="date">9月23日｜星期三 · Wednesday · DAY 7</div>
+                    <h3>杜恩斯泰因 Dürnstein</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">07:00</div>
+                            <div data-zh>抵達杜恩斯泰因。</div>
+                            <div class="hidden" data-en>Arrive in Dürnstein.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">07:00–11:30</div>
+                            <div data-zh>陸地時間：共約 4.5 小時。</div>
+                            <div class="hidden" data-en>Time ashore: approximately 4.5 hours.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">11:30</div>
+                            <div data-zh>離開杜恩斯泰因，前往帕紹。</div>
+                            <div class="hidden" data-en>Depart Dürnstein for Passau.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>今晚</div>
+                            <div class="time hidden" data-en>Tonight</div>
+                            <div data-zh>航行中／船上過夜。</div>
+                            <div class="hidden" data-en>Sailing / overnight onboard.</div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/durnstein.jpg" alt="杜恩斯泰因小鎮 Dürnstein">
+                        <div>
+                            <div class="place">杜恩斯泰因小鎮 <small>Dürnstein</small></div>
+                            <p data-zh>
+                                杜恩斯泰因是瓦豪河谷最具辨識度的小鎮之一，藍白色教堂塔樓、石造街道、葡萄園與山坡城堡遺跡共同構成典型的多瑙河景色。小鎮適合慢步散策、拍攝河景與建築；若時間與體力允許，可眺望山坡上的城堡遺跡，感受中世紀聚落與葡萄酒文化交織的氛圍。
+                            </p>
+                            <p class="hidden" data-en>Dürnstein is one of the Wachau’s most recognisable villages, where
+                                a blue-and-white church tower, stone lanes, vineyards and hillside castle ruins create a
+                                classic Danube scene. It is ideal for slow walks, river views and architecture; with
+                                time and energy, look towards the ruins above the village and experience the meeting of
+                                medieval history and wine culture.</p>
+                        </div>
+                    </div>
+                </article>
+                <article id="d24" class="daycard">
+                    <div class="date">9月24日｜星期四 · Thursday · DAY 8</div>
+                    <h3>帕紹 Passau → 慕尼黑 Munich</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">07:30</div>
+                            <div data-zh>抵達帕紹。</div>
+                            <div class="hidden" data-en>Arrive in Passau.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">07:30–08:30</div>
+                            <div data-zh>陸地時間：下船準備與行李確認，共約 1 小時。</div>
+                            <div class="hidden" data-en>Time ashore: disembarkation preparation and luggage check,
+                                approximately 1 hour.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">08:30 前</div>
+                            <div data-zh>完成下船，之後前往慕尼黑。</div>
+                            <div class="hidden" data-en>Complete disembarkation by 08:30, then continue to Munich.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>下午／晚上</div>
+                            <div class="time hidden" data-en>Afternoon / evening</div>
+                            <div data-zh>慕尼黑啤酒節與市區最後採購。</div>
+                            <div class="hidden" data-en>Oktoberfest and final city shopping.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>住宿</div>
+                            <div class="time hidden" data-en>Accommodation</div>
+                            <div><a class="map" href="https://maps.app.goo.gl/JA6Z1qcKm5vnWrGe9"
+                                    target="_blank">慕尼黑機場南希爾頓歡朋酒店· Hampton by Hilton Munich Airpot South</a></div>
+                        </div>
+                    </div>
+                    <div class="attraction"><img src="images/oktoberfest.jpg" alt="慕尼黑啤酒節 Oktoberfest">
+                        <div>
+                            <div class="place">慕尼黑啤酒節 <small>Oktoberfest</small></div>
+                            <p data-zh>
+                                慕尼黑啤酒節是世界知名的巴伐利亞啤酒與民俗節慶，除了大型啤酒帳篷，也包含傳統服飾、現場音樂、遊樂設施與地方飲食文化。下船後造訪，能為這段河輪與山區旅程增添熱鬧的終章；建議事先確認入場、座位、交通與行李安排。
+                            </p>
+                            <p class="hidden" data-en>Oktoberfest is a world-famous celebration of Bavarian beer and
+                                folk culture. Alongside the large beer tents, it features traditional dress, live music,
+                                rides and regional food. Visiting after disembarkation creates a lively finale; confirm
+                                access, seating, transport and luggage arrangements in advance.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="after" class="section">
+            <div class="section-head">
+                <h2 data-zh>河輪後 · 返程</h2>
+                <h2 class="hidden" data-en>After the Cruise · Return</h2><span>EPILOGUE</span>
+            </div>
+            <div class="daylist">
+                <article id="d25" class="daycard">
+                    <div class="date">2026年9月25日｜星期五 · Friday</div>
+                    <h3>慕尼黑 → 阿布達比 · Munich → Abu Dhabi</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">09:30</div>
+                            <div data-zh>前往機場。</div>
+                            <div class="hidden" data-en>Transfer to the airport.</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">11:25</div>
+                            <div>EY126 · MUC → AUH</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time">21:20</div>
+                            <div>EY898 · AUH → TPE</div>
+                        </div>
+                        <div class="time-row">
+                            <div class="time" data-zh>住宿</div>
+                            <div class="time hidden" data-en>Accommodation</div>
+                            <div data-zh>機上過夜。</div>
+                            <div class="hidden" data-en>Overnight on board.</div>
+                        </div>
+                    </div>
+                </article>
+                <article id="d26" class="daycard">
+                    <div class="date">2026年9月26日｜星期六 · Saturday</div>
+                    <h3>回到台北 · Arrival in Taipei</h3>
+                    <div class="schedule">
+                        <div class="time-row">
+                            <div class="time">09:35</div>
+                            <div data-zh>抵達台北，結束完整旅程。</div>
+                            <div class="hidden" data-en>Arrive in Taipei and conclude the journey.</div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section id="ship" class="section">
+            <div class="section-head">
+                <h2 data-zh>船舶資訊</h2>
+                <h2 class="hidden" data-en>The Ship</h2><span>SHIP</span>
+            </div>
+            <div class="card">
+                <h3>MS Gentleman</h3>
+                <p data-zh>MS Gentleman 於 2024 年 4
+                    月投入服務，擁有現代化高質感氛圍、雅緻客艙、全景酒廊、船尾休憩區、餐廳、接待櫃台、遊輪領隊櫃台與日光甲板。中層與上層甲板設有可開啟的落地窗，能在航行時欣賞河岸景觀。</p>
+                <p class="hidden" data-en>MS Gentleman entered service in April 2024 with a modern, high-quality
+                    ambience, stylish cabins, panoramic salon, aft lounge, restaurant, reception, cruise director desk
+                    and sun deck. Middle and upper decks have openable floor-to-ceiling windows for river views.</p>
+                <p><strong data-zh>本次艙房：</strong><strong class="hidden" data-en>Our cabins:</strong> 335、324、325、201。
+                </p><img class="wide-img" src="images/cabin-plan.jpg" alt="MS Gentleman cabin and deck plan">
+                <table class="ship-table">
+                    <tr>
+                        <th>寬度 · Width</th>
+                        <td>11.4 m</td>
+                    </tr>
+                    <tr>
+                        <th>長度 · Length</th>
+                        <td>135 m</td>
+                    </tr>
+                    <tr>
+                        <th>乘客 · Passengers</th>
+                        <td>172</td>
+                    </tr>
+                    <tr>
+                        <th>艙房總數 · Cabins</th>
+                        <td>86</td>
+                    </tr>
+                    <tr>
+                        <th>船員 · Crew</th>
+                        <td>45</td>
+                    </tr>
+                    <tr>
+                        <th>營運公司 · Operator</th>
+                        <td>Van Loon Cruises Switzerland AG</td>
+                    </tr>
+                    <tr>
+                        <th>船籍 · Flag</th>
+                        <td>Switzerland · 瑞士</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="section">
+            <div class="section-head">
+                <h2 data-zh>全包禮遇</h2>
+                <h2 class="hidden" data-en>Included</h2><span>INCLUDED</span>
+            </div>
+            <div class="card">
+                <ul data-zh>
+                    <li>含早餐全餐、多道式午餐與晚餐、宵夜、咖啡茶與糕點。</li>
+                    <li>08:00–24:00 精選開放式飲品：自家酒、生啤酒、無酒精啤酒、汽水、果汁與礦泉水。</li>
+                    <li>免費使用船上設施、行動音響系統、上下船行李服務與船上遊輪領隊。</li>
+                    <li>艙房配備淋浴／廁所、吹風機、可分離雙人床、衛星電視、電話、冷暖空調、保險箱與迷你吧。</li>
+                </ul>
+                <ul class="hidden" data-en>
+                    <li>Full board, multi-course lunch and dinner, late-night snack, coffee, tea and pastries.</li>
+                    <li>Selected open drinks from 08:00–24:00: house wine, draft beer, non-alcoholic beer, soft drinks,
+                        juices and mineral water.</li>
+                    <li>Free onboard facilities, mobile audio system, luggage service and experienced cruise management.
+                    </li>
+                    <li>Cabins include shower/WC, hair dryer, separable double bed, satellite TV, telephone, air
+                        conditioning/heating, safe and minibar.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <footer>DANUBE GRAND JOURNEY · 2026<br><span data-zh>祝您旅途愉快</span><span class="hidden" data-en>Wishing you a
+            wonderful journey</span></footer>
+    <script>const buttons = document.querySelectorAll('[data-set]'); function setLang(lang) { document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en'; document.querySelectorAll('[data-zh],[data-en]').forEach(el => el.classList.toggle('hidden', !el.hasAttribute('data-' + lang))); buttons.forEach(b => b.classList.toggle('active', b.dataset.set === lang)); localStorage.setItem('tripLang', lang) } buttons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.set))); setLang(localStorage.getItem('tripLang') || 'zh'); document.querySelector('.jump').addEventListener('change', e => { if (e.target.value) document.getElementById(e.target.value).scrollIntoView({ behavior: 'smooth' }); e.target.value = '' })</script>
+</body>
+
+</html>
