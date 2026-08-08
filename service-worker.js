@@ -1,4 +1,4 @@
-const CACHE = 'danube-journey-v3';
+const CACHE = 'danube-journey-v4';
 const APP_SHELL = ['./', './index.html', './styles.css', './app.js', './manifest.json', './danube_grand_journey.html'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
