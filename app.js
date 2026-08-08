@@ -27,19 +27,48 @@ if (localStorage.getItem('danube-theme') === 'dark') document.body.classList.add
 document.querySelector('#toTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 window.addEventListener('scroll', () => { document.querySelector('#toTop').hidden = window.scrollY < 500; }, {passive:true});
 
-function buildToc() {
-  const headings = [...content.querySelectorAll('h1,h2,h3')];
+function visibleText(node) {
+  const zh = node.querySelector('[data-zh]');
+  return (zh ? zh.textContent : node.textContent).replace(/\s+/g, ' ').trim();
+}
+
+function addMenuLink(label, target, level = '') {
+  if (!target || target === '#') return;
+  const link = document.createElement('a');
+  link.href = target.startsWith('#') ? target : `#${target}`;
+  link.textContent = label;
+  link.className = level;
+  link.addEventListener('click', () => openMenu(false));
+  toc.appendChild(link);
+}
+
+function buildOriginalMenu(originalNav, originalJump) {
   toc.replaceChildren();
-  if (!headings.length) { toc.innerHTML = '<p class="muted">沒有可用目錄</p>'; return; }
-  headings.forEach((heading, i) => {
-    if (!heading.id) heading.id = `section-${i + 1}`;
-    const link = document.createElement('a');
-    link.href = `#${heading.id}`;
-    link.textContent = heading.textContent.trim();
-    link.className = `level-${heading.tagName.slice(1)}`;
-    link.addEventListener('click', () => openMenu(false));
-    toc.appendChild(link);
+  const title = document.createElement('div');
+  title.className = 'menu-group-title';
+  title.textContent = '旅程章節';
+  toc.appendChild(title);
+  originalNav?.querySelectorAll('a[href]').forEach(anchor => {
+    addMenuLink(visibleText(anchor), anchor.getAttribute('href'));
   });
+
+  const options = [...(originalJump?.querySelectorAll('option') || [])]
+    .filter(option => option.value && !/^Jump/i.test(option.textContent.trim()));
+  if (options.length) {
+    const dateTitle = document.createElement('div');
+    dateTitle.className = 'menu-group-title';
+    dateTitle.textContent = '每日行程';
+    toc.appendChild(dateTitle);
+    options.forEach(option => addMenuLink(option.textContent.trim(), option.value, 'level-3'));
+  }
+
+  if (!toc.querySelector('a')) {
+    const headings = [...content.querySelectorAll('h1,h2,h3')];
+    headings.forEach((heading, i) => {
+      if (!heading.id) heading.id = `section-${i + 1}`;
+      addMenuLink(heading.textContent.trim(), `#${heading.id}`, `level-${heading.tagName.slice(1)}`);
+    });
+  }
 }
 
 function absolutizeAssetUrls(root, base) {
@@ -59,10 +88,14 @@ async function loadSource() {
     const html = await response.text();
     const parsed = new DOMParser().parseFromString(html, 'text/html');
     const sourceBody = parsed.body || parsed.documentElement;
-    sourceBody.querySelectorAll('script,style,link[rel="stylesheet"]').forEach(node => node.remove());
+    const originalNav = sourceBody.querySelector('nav.nav');
+    const originalJump = sourceBody.querySelector('select.jump');
+
+    // Remove the original fixed header/menu so only the new mobile menu remains.
+    sourceBody.querySelectorAll('header.topbar, nav.nav, select.jump, .lang, script, style, link[rel="stylesheet"]').forEach(node => node.remove());
     absolutizeAssetUrls(sourceBody, new URL(SOURCE, document.baseURI));
     content.replaceChildren(...sourceBody.childNodes);
-    buildToc();
+    buildOriginalMenu(originalNav, originalJump);
     status.textContent = '離線旅程 App · 內容已載入';
   } catch (err) {
     status.hidden = true;
